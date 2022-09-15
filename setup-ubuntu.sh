@@ -176,11 +176,11 @@ echo "############################################"
 ############################ Extensions ##################################
 
 ## Make sure the directory for storing the user's shell extension exists.
-sudo -u $USER mkdir -p ~/.local/share/gnome-shell/extensions/
+sudo -u $USER mkdir -p /HOME/$USER/.local/share/gnome-shell/extensions/
 
 ## Move the shell extension to the correct directory.
-sudo -u $USER cp $SCRIPT_DIR/extensions/extensions.tar.xz ~/.local/share/gnome-shell/extensions/
-cd ~/.local/share/gnome-shell/extensions/
+sudo -u $USER cp $SCRIPT_DIR/extensions/extensions.tar.xz /HOME/$USER/.local/share/gnome-shell/extensions/
+cd /HOME/$USER/.local/share/gnome-shell/extensions/
 sudo -u $USER tar -xvf extensions.tar.xz
 rm -rf extensions.tar.xz
 cd $SCRIPT_DIR
@@ -191,10 +191,10 @@ cd $SCRIPT_DIR
 ############################ Fonts #######################################
 
 ## Make sure the directory for storing the fonts exists.
-sudo -u $USER mkdir -p ~/.local/share/fonts
+sudo -u $USER mkdir -p /HOME/$USER/.local/share/fonts
 
 ## Copy fonts to the correct directory.
-sudo -u $USER cp -R ./fonts/* ~/.local/share/fonts
+sudo -u $USER cp -R ./fonts/* /HOME/$USER/.local/share/fonts
 
 ############################ Theme #######################################
 
@@ -251,13 +251,13 @@ cd $SCRIPT_DIR
 ## Install Powerlevel10k
 echo -e "Installing Powerlevel10k..."
 git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 
-echo 'source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+echo 'source /HOME/$USER/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme' >>/HOME/$USER/.zshrc
 
 ## Install zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions /HOME/$USER/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 ## Install zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /HOME/$USER/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 ## Move dotfiles to correct directory
 echo -e "${YELLOW}Moving dotfiles to correct directory...${C_OFF}"
