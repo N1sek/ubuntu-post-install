@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-if [ $EUID != 0 ]; then
-    "$0" "$@"
-    exit $?
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+    echo "Not running as root"
+    exit
 fi
+
 
 ##Color
 RED='\033[0;31m'
@@ -16,12 +17,8 @@ C_OFF='\033[0m'        # Reset Color
 ## Get script directory
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-## Ubuntu version (number)
-system="`lsb_release -rs`"
-
-## Active icon theme
-activeTheme=$(gsettings get org.gnome.desktop.interface icon-theme | tr -d "'")
-
+## Get logged user
+USER="$SUDO_USER"
 
 ########################## Programs ##################################
 
