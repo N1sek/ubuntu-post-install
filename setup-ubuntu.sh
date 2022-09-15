@@ -176,11 +176,11 @@ echo "############################################"
 ############################ Extensions ##################################
 
 ## Make sure the directory for storing the user's shell extension exists.
-sudo -u $USER mkdir -p /HOME/$USER/.local/share/gnome-shell/extensions/
+sudo -u $USER mkdir -p /home/$USER/.local/share/gnome-shell/extensions/
 
 ## Move the shell extension to the correct directory.
-sudo -u $USER cp $SCRIPT_DIR/extensions/extensions.tar.xz /HOME/$USER/.local/share/gnome-shell/extensions/
-cd /HOME/$USER/.local/share/gnome-shell/extensions/
+sudo -u $USER cp $SCRIPT_DIR/extensions/extensions.tar.xz /home/$USER/.local/share/gnome-shell/extensions/
+cd /home/$USER/.local/share/gnome-shell/extensions/
 sudo -u $USER tar -xvf extensions.tar.xz
 rm -rf extensions.tar.xz
 cd $SCRIPT_DIR
@@ -191,10 +191,10 @@ cd $SCRIPT_DIR
 ############################ Fonts #######################################
 
 ## Make sure the directory for storing the fonts exists.
-sudo -u $USER mkdir -p /HOME/$USER/.local/share/fonts
+sudo -u $USER mkdir -p /home/$USER/.local/share/fonts
 
 ## Copy fonts to the correct directory.
-sudo -u $USER cp -R ./fonts/* /HOME/$USER/.local/share/fonts
+sudo -u $USER cp -R ./fonts/* /home/$USER/.local/share/fonts
 
 ############################ Theme #######################################
 
@@ -208,7 +208,7 @@ echo
 killall -9 firefox > /dev/null 2>&1
 
 echo -e "Installing WhiteSur Theme..."
-git clone -q https://github.com/vinceliuice/WhiteSur-gtk-theme.git
+sudo -u $USER git clone -q https://github.com/vinceliuice/WhiteSur-gtk-theme.git
 cd WhiteSur-gtk-theme
 ./install.sh -l -i ubuntu -m
 ./tweaks.sh -f monterey -g -b $SCRIPT_DIR/images/background.jpg -s
@@ -217,7 +217,7 @@ cd $SCRIPT_DIR
 
 ## WhiteSur Icons
 echo -e "Installing WhiteSur Icons..."
-git clone -q https://github.com/vinceliuice/WhiteSur-icon-theme.git 
+sudo -u $USER git clone -q https://github.com/vinceliuice/WhiteSur-icon-theme.git 
 cd WhiteSur-icon-theme
 ./install.sh 
 cd $SCRIPT_DIR
@@ -250,14 +250,14 @@ cd $SCRIPT_DIR
 
 ## Install Powerlevel10k
 echo -e "Installing Powerlevel10k..."
-sudo -u $USER git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 
-echo 'source /HOME/$USER/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme' >>/HOME/$USER/.zshrc
+sudo -u $USER git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$home/.oh-my-zsh/custom}/themes/powerlevel10k 
+echo 'source /home/$USER/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme' >>/home/$USER/.zshrc
 
 ## Install zsh-autosuggestions
-sudo -u $USER git clone https://github.com/zsh-users/zsh-autosuggestions /HOME/$USER/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+sudo -u $USER git clone https://github.com/zsh-users/zsh-autosuggestions /home/$USER/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 ## Install zsh-syntax-highlighting
-sudo -u $USER git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /HOME/$USER/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+sudo -u $USER git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /home/$USER/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 ## Move dotfiles to correct directory
 echo -e "${YELLOW}Moving dotfiles to correct directory...${C_OFF}"
