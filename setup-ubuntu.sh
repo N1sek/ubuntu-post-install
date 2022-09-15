@@ -223,7 +223,7 @@ cd WhiteSur-icon-theme
 cd $SCRIPT_DIR
 
 ## Load all settings
-sudo -u $USER dconf load / < dconf-backup.txt
+sudo -u $USER dconf load / < dconf-settings.ini
 
 ## Set background
 sudo -u $USER cp ./images/background.jpg /home/$USER/ 
