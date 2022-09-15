@@ -244,27 +244,27 @@ echo -e "${YELLOW}Installing zsh...${C_OFF}"
 apt install zsh -y
 
 ## Install oh-my-zsh
-wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+sudo -u $USER wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 sh install.sh --unattended
 cd $SCRIPT_DIR
 
 ## Install Powerlevel10k
 echo -e "Installing Powerlevel10k..."
-git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 
+sudo -u $USER git clone --quiet --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k 
 echo 'source /HOME/$USER/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme' >>/HOME/$USER/.zshrc
 
 ## Install zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions /HOME/$USER/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+sudo -u $USER git clone https://github.com/zsh-users/zsh-autosuggestions /HOME/$USER/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
 ## Install zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /HOME/$USER/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+sudo -u $USER git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /HOME/$USER/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 ## Move dotfiles to correct directory
 echo -e "${YELLOW}Moving dotfiles to correct directory...${C_OFF}"
-sudo -u $USER cp -R $SCRIPT_DIR/dotfiles/dotfiles.tar.xz /home/$USER/
+cp -R $SCRIPT_DIR/dotfiles/dotfiles.tar.xz /home/$USER/
 # Unzip tar.xz file
 cd /home/$USER/
-sudo -u $USER tar -xvf dotfiles.tar.xz
+tar -xvf dotfiles.tar.xz
 rm dotfiles.tar.xz
 cd $SCRIPT_DIR
 
