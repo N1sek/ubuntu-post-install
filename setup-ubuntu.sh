@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [ $EUID != 0 ]; then
+    "$0" "$@"
+    exit $?
+fi
+
 ##Color
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -22,22 +27,22 @@ activeTheme=$(gsettings get org.gnome.desktop.interface icon-theme | tr -d "'")
 
 ## Add repositories
 echo -e "${YELLOW}Adding repositories...${C_OFF}"
-sudo add-apt-repository universe -y
-sudo add-apt-repository ppa:mozillateam/ppa -y
-sudo add-apt-repository ppa:danielrichter2007/grub-customizer -y
+add-apt-repository universe -y
+add-apt-repository ppa:mozillateam/ppa -y
+add-apt-repository ppa:danielrichter2007/grub-customizer -y
 
 ## Visual Studio Code ##
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" -y
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
+add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" -y
 
 ## Firefox ##
 # Add priority to Firefox deb/apt version
-sudo touch /etc/apt/preferences.d/mozillateanppa
-echo -e "Package: firefox*\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001" | sudo tee /etc/apt/preferences.d/mozillateanppa
+touch /etc/apt/preferences.d/mozillateanppa
+echo -e "Package: firefox*\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001" | tee /etc/apt/preferences.d/mozillateanppa
 
 ## Update repositories
 echo -e "${YELLOW}Updating repositories...${C_OFF}"
-sudo apt update > /dev/null 2>&1
+apt update > /dev/null 2>&1
 
 
 ## Programs to be removed
@@ -130,7 +135,7 @@ for program_name in ${REMOVE_APT[@]}; do
 	if dpkg -l | grep -q $program_name; then # If program is installed
 		echo -e "${YELLOW}	[REMOVING] - $program_name ${C_OFF}"
 
-		sudo apt remove "$program_name" -y -q
+		apt remove "$program_name" -y -q
 	fi
 done
 echo -e "${GREEN}Bloatware removed${C_OFF}"
@@ -141,18 +146,18 @@ for program_name in ${PROGRAMS_APT[@]}; do
 	if ! dpkg -l | grep -q $program_name; then # If program is not installed
 		echo -e "${YELLOW}	[INSTALLING] - $program_name ${C_OFF}"
 
-		sudo apt install "$program_name" -y -q
+		apt install "$program_name" -y -q
 	fi
 done
 
 # Just in case
-sudo apt install -y --fix-broken --install-recommends
+apt install -y --fix-broken --install-recommends
 
 ## Remove junk and update
 echo -e "${YELLOW}Updating, upgrading and cleaning system...${C_OFF}"
-sudo apt update && sudo apt dist-upgrade -y
-sudo apt autoclean
-sudo apt autoremove -y
+apt update && apt dist-upgrade -y
+apt autoclean
+apt autoremove -y
 
 ## Checklist
 echo -e "\nInstalled APT's:"
@@ -208,8 +213,8 @@ killall -9 firefox > /dev/null 2>&1
 echo -e "Installing WhiteSur Theme..."
 git clone -q https://github.com/vinceliuice/WhiteSur-gtk-theme.git
 cd WhiteSur-gtk-theme
-sudo ./install.sh -l -i ubuntu -m
-sudo ./tweaks.sh -f monterey -g -b $SCRIPT_DIR/images/background.jpg -s
+./install.sh -l -i ubuntu -m
+./tweaks.sh -f monterey -g -b $SCRIPT_DIR/images/background.jpg -s
 sleep 3
 cd $SCRIPT_DIR
 
@@ -217,7 +222,7 @@ cd $SCRIPT_DIR
 echo -e "Installing WhiteSur Icons..."
 git clone -q https://github.com/vinceliuice/WhiteSur-icon-theme.git 
 cd WhiteSur-icon-theme
-sudo ./install.sh 
+./install.sh 
 cd $SCRIPT_DIR
 
 ## Load all settings
@@ -239,11 +244,11 @@ echo -e "Changes will be applied after restarting the computer"
 
 ## Install zsh
 echo -e "${YELLOW}Installing zsh...${C_OFF}"
-sudo apt install zsh -y
+apt install zsh -y
 
 ## Install oh-my-zsh
 wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-sudo sh install.sh --unattended
+sh install.sh --unattended
 cd $SCRIPT_DIR
 
 ## Install Powerlevel10k
