@@ -1,6 +1,6 @@
 # ubuntu-post-installer
 
-This is my own custom script to setup Ubuntu 22.04. MacOS like.
+This is my own custom script to setup Ubuntu 22.04. MacOS like (GNOME).
 
 ## Installation
 ### 1- Clone this repository
@@ -9,10 +9,10 @@ git clone https://github.com/N1sek/ubuntu-post-installer
 cd ubuntu-post-install
 ```
 
-### 2- Add permissions and run the script 
+### 2- Add permissions and run the script as root
 ```
 sudo chmod +x setup-ubuntu.sh
-./setup-ubuntu.sh
+sudo ./setup-ubuntu.sh
 ```
 
 ### 3- Reboot

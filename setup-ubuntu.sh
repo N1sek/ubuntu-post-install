@@ -6,7 +6,7 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
 fi
 
 
-##Color
+##Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -99,9 +99,9 @@ PROGRAMS_APT=(
     software-properties-common
     apt-transport-https
     sassc
+	dbus-x11
 
 	## CLI
-	git
 	htop
 	neofetch
     curl
@@ -176,12 +176,12 @@ echo "############################################"
 ############################ Extensions ##################################
 
 ## Make sure the directory for storing the user's shell extension exists.
-mkdir -p ~/.local/share/gnome-shell/extensions/
+sudo -u $USER mkdir -p ~/.local/share/gnome-shell/extensions/
 
 ## Move the shell extension to the correct directory.
-cp $SCRIPT_DIR/extensions/extensions.tar.xz ~/.local/share/gnome-shell/extensions/
+sudo -u $USER cp $SCRIPT_DIR/extensions/extensions.tar.xz ~/.local/share/gnome-shell/extensions/
 cd ~/.local/share/gnome-shell/extensions/
-tar -xvf extensions.tar.xz
+sudo -u $USER tar -xvf extensions.tar.xz
 rm -rf extensions.tar.xz
 cd $SCRIPT_DIR
 
@@ -191,10 +191,10 @@ cd $SCRIPT_DIR
 ############################ Fonts #######################################
 
 ## Make sure the directory for storing the fonts exists.
-mkdir -p ~/.local/share/fonts
+sudo -u $USER mkdir -p ~/.local/share/fonts
 
 ## Copy fonts to the correct directory.
-cp -R ./fonts/* ~/.local/share/fonts
+sudo -u $USER cp -R ./fonts/* ~/.local/share/fonts
 
 ############################ Theme #######################################
 
@@ -223,11 +223,11 @@ cd WhiteSur-icon-theme
 cd $SCRIPT_DIR
 
 ## Load all settings
-dconf load / < dconf-backup.txt
+sudo -u $USER dconf load / < dconf-backup.txt
 
 ## Set background
-cp ./images/background.jpg /home/$USER/ 
-gsettings set org.gnome.desktop.background picture-uri-dark file:///home/$USER/background.jpg;
+sudo -u $USER cp ./images/background.jpg /home/$USER/ 
+sudo -u $USER gsettings set org.gnome.desktop.background picture-uri-dark file:///home/$USER/background.jpg;
 
 echo
 echo "############################################"
@@ -261,10 +261,10 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/
 
 ## Move dotfiles to correct directory
 echo -e "${YELLOW}Moving dotfiles to correct directory...${C_OFF}"
-cp -R $SCRIPT_DIR/dotfiles/dotfiles.tar.xz /home/$USER/
+sudo -u $USER cp -R $SCRIPT_DIR/dotfiles/dotfiles.tar.xz /home/$USER/
 # Unzip tar.xz file
 cd /home/$USER/
-tar -xvf dotfiles.tar.xz
+sudo -u $USER tar -xvf dotfiles.tar.xz
 rm dotfiles.tar.xz
 cd $SCRIPT_DIR
 
