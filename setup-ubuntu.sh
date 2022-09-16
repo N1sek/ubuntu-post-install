@@ -102,6 +102,7 @@ PROGRAMS_APT=(
 	dbus-x11
 
 	## CLI
+    bat
 	htop
 	neofetch
     curl
