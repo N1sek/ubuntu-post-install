@@ -34,8 +34,8 @@ add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode
 
 ## Firefox ##
 # Add priority to Firefox deb/apt version
-touch /etc/apt/preferences.d/mozillateanppa
-echo -e "Package: firefox*\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001" | tee /etc/apt/preferences.d/mozillateanppa
+touch /etc/apt/preferences.d/mozillateamppa
+echo -e "Package: firefox*\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001" | tee /etc/apt/preferences.d/mozillateamppa
 
 ## Update repositories
 echo -e "${YELLOW}Updating repositories...${C_OFF}"
